@@ -21,6 +21,7 @@ public class ActivityTutorSignup extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private ActivityTutorSignupBinding binding;
     private ProgressDialog progressDialog;
+    DAOTutorDetails daoTutorDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,20 @@ public class ActivityTutorSignup extends AppCompatActivity {
         binding=ActivityTutorSignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        DAOTutorDetails daoTutorDetails=new DAOTutorDetails();
 
         progressDialog=new ProgressDialog(this);
         firebaseAuth=FirebaseAuth.getInstance();
+
+
+
+        binding.infoSave.setOnClickListener(v -> {
+
+
+        });
+    }
+    private void  registerUser(){
+
+        daoTutorDetails=new DAOTutorDetails();
 
         String strEmail=binding.tutorEmail.getText().toString();
         String strPassword=binding.tutorPasswordr.getText().toString();
@@ -46,68 +57,46 @@ public class ActivityTutorSignup extends AppCompatActivity {
         String state=binding.stateTutor.getText().toString();
         String country=binding.tutorCountry.getText().toString();
 
-        binding.infoSave.setOnClickListener(v -> {
 
-            if(!strPassword.equals(cnfrmPassword))
-            {
-                Toast.makeText(ActivityTutorSignup.this,"Password should be same",Toast.LENGTH_SHORT).show();
-            }
-            else {
+        if(TextUtils.isEmpty(strEmail))
+        {
+            Toast.makeText(this,"please Enter Email",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(strPassword))
+        {
+            Toast.makeText(this,"please Enter Password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        progressDialog.setMessage("Registering please wait...");
+        progressDialog.show();
 
-                if (!TextUtils.isEmpty(strEmail) && !TextUtils.isEmpty(strPassword) && !TextUtils.isEmpty(name) && !TextUtils.isEmpty(qualifications)  && !TextUtils.isEmpty(Experience)  && !TextUtils.isEmpty(amount)  && !TextUtils.isEmpty(Bio)  && !TextUtils.isEmpty(location)  && !TextUtils.isEmpty(contactNumber)  && !TextUtils.isEmpty(state)  && !TextUtils.isEmpty(country)) {
+        firebaseAuth.createUserWithEmailAndPassword(strEmail,strPassword)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful())
+                        {
+                            finish();
+                            //Adding data
+                            TutorDetails tutorDetails=new TutorDetails(strEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
+                            daoTutorDetails.add(tutorDetails,strEmail).addOnSuccessListener(suc->
+                            {
+                                Toast.makeText(getApplicationContext(),"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
+                            }).addOnFailureListener(er->{
+                                Toast.makeText(getApplicationContext(),""+er.getMessage(),Toast.LENGTH_SHORT).show();
 
+                            });
 
-            progressDialog.setMessage("Registering...");
-                    progressDialog.show();
-
-                    firebaseAuth.createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(ActivityTutorSignup.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(ActivityTutorSignup.this, "Account Created sucessfully!", Toast.LENGTH_SHORT).show();
-
-                                firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-
-                                            //To save Details
-                                            TutorDetails tutorDetails=new TutorDetails(strEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
-                                            daoTutorDetails.add(tutorDetails,strEmail).addOnSuccessListener(suc->
-                                            {
-                                                Toast.makeText(ActivityTutorSignup.this,"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
-                                            }).addOnFailureListener(er->{
-                                                Toast.makeText(ActivityTutorSignup.this,""+er.getMessage(),Toast.LENGTH_SHORT).show();
-
-                                            });
-
-                                            //To move to next Activity
-
-                                            Intent intent = new Intent(ActivityTutorSignup.this, LoginActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        } else {
-                                            Toast.makeText(ActivityTutorSignup.this, "Error in sending link\nTry again", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                                firebaseAuth.signOut();
-                            } else {
-                                Toast.makeText(ActivityTutorSignup.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                            progressDialog.dismiss();
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }
-                    });
-
-
-                }
-                else {
-                    Toast.makeText(ActivityTutorSignup.this, "Each field should be filled", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-
-        });
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"Registration error",Toast.LENGTH_SHORT).show();
+                        }
+                        progressDialog.dismiss();
+                    }
+                });
     }
 
 }

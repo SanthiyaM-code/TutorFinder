@@ -17,7 +17,7 @@ public class DAOTutorDetails {
 
     public Task<Void> add(TutorDetails tutorDetails, String email)
     {
-        return databaseReference.child(email).child("Tutor Details").setValue(tutorDetails);
+        return databaseReference.push().child("Tutor Details").setValue(tutorDetails);
     }
     public Task<Void> update (String key, HashMap<String,Object> hashMap)
     {

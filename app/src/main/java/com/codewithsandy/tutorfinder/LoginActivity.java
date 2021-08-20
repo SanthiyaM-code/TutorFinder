@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +21,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
     private ActivityLoginBinding binding;
     final Context context=this;
 
@@ -31,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         firebaseAuth=FirebaseAuth.getInstance();
+        progressDialog=new ProgressDialog(this);
 
         binding.buttonLogin.setOnClickListener(v -> {
             String stremail=binding.loginEmail.getText().toString();
@@ -38,61 +42,32 @@ public class LoginActivity extends AppCompatActivity {
             Boolean isStudent=binding.radioButtonstudent.isChecked();
             Boolean isTutor=binding.radioButtontutor.isChecked();
 
-            if(!TextUtils.isEmpty(stremail) && !TextUtils.isEmpty(strpassword)){
-                firebaseAuth.signInWithEmailAndPassword(stremail,strpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful())
-                        {
-                            if(firebaseAuth.getCurrentUser().isEmailVerified())
+            if(TextUtils.isEmpty(stremail))
+            {
+                Toast.makeText(this,"please Enter Email",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(TextUtils.isEmpty(strpassword))
+            {
+                Toast.makeText(this,"please Enter Password",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            progressDialog.setMessage("Loging Please wait");
+
+            progressDialog.show();
+
+            firebaseAuth.signInWithEmailAndPassword(stremail,strpassword)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull  Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            if(task.isSuccessful())
                             {
-                                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                                startActivity(intent);
                                 finish();
-                            }
-                            else
-                            {
-                                binding.resend.setVisibility(View.VISIBLE);
-                                binding.resend.setClickable(true);
-                                Toast.makeText(LoginActivity.this,"Please verify your email\n and continue!",Toast.LENGTH_SHORT).show();
-                                firebaseAuth.signOut();
-
+                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             }
                         }
-                        else
-                        {
-                            Toast.makeText(LoginActivity.this,task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-            }
-            else{
-                Toast.makeText(LoginActivity.this,"Email and Password cannot be empty!",Toast.LENGTH_SHORT).show();
-            }
-
-            binding.resend.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(firebaseAuth!=null)
-                    {
-                        if(firebaseAuth.getCurrentUser()!=null)
-                        {
-                            firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful())
-                                    {
-                                        Toast.makeText(LoginActivity.this,"Link has been sent to your Email\nplease verify and continue!",Toast.LENGTH_SHORT).show();
-
-                                    }
-
-                                }
-                            });
-                        }
-                    }
-                }
-            });
+                    });
         });
 
 

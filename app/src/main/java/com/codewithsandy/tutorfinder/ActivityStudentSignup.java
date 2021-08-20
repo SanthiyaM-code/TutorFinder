@@ -20,6 +20,7 @@ public class ActivityStudentSignup extends AppCompatActivity {
     private ActivityStudentSignupBinding binding;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+    DAOStudentDetails daoStudentDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,28 @@ public class ActivityStudentSignup extends AppCompatActivity {
         binding= ActivityStudentSignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        DAOStudentDetails daoStudentDetails=new DAOStudentDetails();
 
         progressDialog=new ProgressDialog(this);
         firebaseAuth=FirebaseAuth.getInstance();
+
+        if(firebaseAuth.getCurrentUser()!=null)
+        {
+            finish();
+            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        }
+
+
+
+        binding.studentSignup.setOnClickListener(v -> {
+            registerUser();
+        });
+
+
+
+    }
+    private void  registerUser(){
+
+        daoStudentDetails=new DAOStudentDetails();
 
         String strEmail=binding.studentEmail.getText().toString();
         String strPassword=binding.studentPasswordr.getText().toString();
@@ -43,64 +62,50 @@ public class ActivityStudentSignup extends AppCompatActivity {
         String state=binding.stateStudent.getText().toString();
         String country=binding.stuCountry.getText().toString();
 
-        binding.studentSignup.setOnClickListener(v -> {
+        String email=binding.studentEmail.getText().toString();
+        String password=binding.studentPasswordr.getText().toString();
 
-            if(!strPassword.equals(cnfrmPassword))
-            {
-                Toast.makeText(ActivityStudentSignup.this,"Password should be same",Toast.LENGTH_SHORT).show();
-            }
-            else {
 
-                if (!TextUtils.isEmpty(cnfrmPassword) &&    !TextUtils.isEmpty(strEmail) && !TextUtils.isEmpty(strPassword) && !TextUtils.isEmpty(name) &&  !TextUtils.isEmpty(clgName)  && !TextUtils.isEmpty(grade)  && !TextUtils.isEmpty(location)  && !TextUtils.isEmpty(contactNumber)  && !TextUtils.isEmpty(state)  && !TextUtils.isEmpty(country))
-                {
-                    progressDialog.setMessage("Registering...");
-                    progressDialog.show();
+        if(TextUtils.isEmpty(email))
+        {
+            Toast.makeText(this,"please Enter Email",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(password))
+        {
+            Toast.makeText(this,"please Enter Password",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        progressDialog.setMessage("Registering please wait...");
+        progressDialog.show();
 
-                    firebaseAuth.createUserWithEmailAndPassword(strEmail, strPassword).addOnCompleteListener(ActivityStudentSignup.this, task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(ActivityStudentSignup.this, "Account Created sucessfully!", Toast.LENGTH_SHORT).show();
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful())
+                        {
+                            finish();
+                            //Adding data
+                            StudentDetails studentDetails=new StudentDetails(strEmail,name,grade,clgName,location,contactNumber,state,country);
+                            daoStudentDetails.add(studentDetails,strEmail).addOnSuccessListener(suc->
+                            {
+                                Toast.makeText(ActivityStudentSignup.this,"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
+                            }).addOnFailureListener(er->{
+                                Toast.makeText(ActivityStudentSignup.this,""+er.getMessage(),Toast.LENGTH_SHORT).show();
 
-                            firebaseAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-
-                                        //To save Details
-                                        StudentDetails studentDetails=new StudentDetails(strEmail,name,grade,clgName,location,contactNumber,state,country);
-                                        daoStudentDetails.add(studentDetails,strEmail).addOnSuccessListener(suc->
-                                        {
-                                            Toast.makeText(ActivityStudentSignup.this,"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
-                                        }).addOnFailureListener(er->{
-                                            Toast.makeText(ActivityStudentSignup.this,""+er.getMessage(),Toast.LENGTH_SHORT).show();
-
-                                        });
-                                        //To move to next Activity
-
-                                        Intent intent = new Intent(ActivityStudentSignup.this, LoginActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(ActivityStudentSignup.this, "Error in sending link\nTry again", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
                             });
-                            firebaseAuth.signOut();
-                        } else {
-                            Toast.makeText(ActivityStudentSignup.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(),"Registration error",Toast.LENGTH_SHORT).show();
                         }
                         progressDialog.dismiss();
-                    });
-
-
-                }
-                else
-                    {
-                    Toast.makeText(ActivityStudentSignup.this, "Each field should be filled", Toast.LENGTH_SHORT).show();
                     }
-            }
-        });
-
-
-
+                });
     }
 }
+
+//    To save Details
