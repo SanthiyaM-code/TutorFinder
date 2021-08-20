@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TutorFinder</string>
+    <string name="dontHavbtn">Don\'t have an account yet?<font color='#3CA6DA'> Sign Up.</font></string>
 </resources>

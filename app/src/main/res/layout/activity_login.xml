@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".LoginActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/text_blue"
+            android:text="Welcome!\nFind your best Tutor here"/>
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:src="@drawable/login_logo">
+        </ImageView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="29dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:fontFamily="@font/nunito"
+                android:textSize="18sp"
+                android:textColor="#3CA6DA"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                />
+        </RelativeLayout>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="21dp"-->
+<!--            android:layout_marginLeft="28dp"-->
+<!--            android:text="Email"-->
+<!--            android:textColor="#333333"-->
+<!--            android:fontFamily="@font/nunito"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="18dp"/>-->
+
+        <EditText
+            android:id="@+id/loginEmail"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:ems="10"
+            android:layout_marginTop="11dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:hint="Email"
+            android:fontFamily="@font/nunito"
+            android:padding="15dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/background"
+            android:textSize="17dp"/>
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:layout_marginLeft="28dp"-->
+<!--            android:text="Password"-->
+<!--            android:textColor="#333333"-->
+<!--            android:fontFamily="@font/nunito"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textSize="18dp"/>-->
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:ems="10"
+            android:id="@+id/loginPassword"
+            android:layout_marginTop="11dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:hint="Enter your password"
+            android:fontFamily="@font/nunito"
+            android:padding="15dp"
+            android:gravity="center_vertical"
+            android:background="@drawable/background"
+            android:textSize="17dp"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="10dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonstudent"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/nunito_semibold"
+                android:buttonTint="@color/text_blue"
+                android:textSize="16dp"
+                android:textColor="@color/text_blue"
+                android:layout_height="wrap_content"
+                android:text="Student" />
+
+            <RadioButton
+                android:id="@+id/radioButtontutor"
+                android:layout_width="match_parent"
+                android:fontFamily="@font/nunito_semibold"
+                android:buttonTint="@color/text_blue"
+                android:textSize="16dp"
+                android:textColor="@color/text_blue"
+                android:layout_height="wrap_content"
+                android:text="Tutor" />
+        </RadioGroup>
+
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <CheckBox-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="28dp"-->
+<!--                android:gravity="fill"-->
+<!--                android:layout_weight="1"-->
+<!--                android:id="@+id/JS_remember_me"-->
+<!--                android:text="Remember me"-->
+<!--                android:textColor="#3598DB"-->
+<!--                android:backgroundTint="#3598DB"-->
+<!--                android:buttonTint="#3598DB"-->
+<!--                android:layout_marginStart="28dp"-->
+<!--                android:layout_marginEnd="15dp"-->
+<!--                android:textSize="16sp"-->
+<!--                android:fontFamily="@font/nunito"-->
+<!--                />-->
+
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textAlignment="textEnd"-->
+<!--                android:text="Forget Password"-->
+<!--                android:layout_marginEnd="28dp"-->
+<!--                android:gravity="end"-->
+<!--                android:layout_weight="1"-->
+<!--                android:textColor="#3598DB"-->
+<!--                android:fontFamily="@font/nunito"-->
+<!--                android:textSize="16sp"/>-->
+<!--        </LinearLayout>-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginEnd="28dp"
+            android:text="Login"
+            android:textSize="18sp"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/white"
+            android:background="@drawable/background_solid"
+            android:textAllCaps="false"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/signupinLogin"
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="28dp"
+            android:textAlignment="center"
+            android:layout_marginEnd="28dp"
+            android:textColor="@color/black"
+            android:text="@string/dontHavbtn"
+            android:fontFamily="@font/nunito"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/resend"
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="40dp"
+            android:layout_marginStart="28dp"
+            android:textAlignment="center"
+            android:layout_marginEnd="28dp"
+            android:textColor="@color/black"
+            android:text="Resend Link"
+            android:visibility="gone"
+            android:fontFamily="@font/nunito"
+            android:textSize="16sp"/>
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>
