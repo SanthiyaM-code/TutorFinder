@@ -41,7 +41,7 @@ public class FavoritesActivity extends AppCompatActivity {
 
 
         String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
-        firestore.collection("Student").document(uid).collection("Favorite").get()
+        firestore.collection("Student").document(uid).collection("Favorites").get()
                 .addOnCompleteListener(task ->
                 {
 
@@ -63,12 +63,12 @@ public class FavoritesActivity extends AppCompatActivity {
 
 
 
-        FavoriteRecyclerAdapter adapter = new FavoriteRecyclerAdapter(tutorsFav,this);
-
+//        FavoriteRecyclerAdapter adapter = new FavoriteRecyclerAdapter(tutorsFav,this);
         favrecyclerView = findViewById(R.id.fav_recyclerview);
         favrecyclerView.setHasFixedSize(true);
         favrecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        favrecyclerView.setAdapter(adapter);
+        updateFavRecyclerView();
+//        favrecyclerView.setAdapter(adapter);
 
     }
     void updateFavRecyclerView()
