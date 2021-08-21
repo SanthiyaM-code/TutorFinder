@@ -3,11 +3,13 @@ package com.codewithsandy.tutorfinder;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.codewithsandy.tutorfinder.databinding.ActivityTutorProfileViewBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,49 +19,36 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 public class TutorProfileViewActivity extends AppCompatActivity {
 
-    TextView sendRequest;
-    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    Tutor tutor;
+    private ActivityTutorProfileViewBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tutor_profile_view);
+        binding=ActivityTutorProfileViewBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        String tutorUid = getIntent().getStringExtra("tutorUid");
-        if(tutorUid == null)
-            Log.d("INNOVA", "NULLDA");
-        else
-            Log.d("INNOVA", tutorUid);
+        String name=getIntent().getStringExtra("name");
+        String loc=getIntent().getStringExtra("location");
+        String bio=getIntent().getStringExtra("bio");
+        String contact=getIntent().getStringExtra("contactNumber");
+        String qualification=getIntent().getStringExtra("qualification");
+        String experience=getIntent().getStringExtra("experience");
+        String amount=getIntent().getStringExtra("amount");
+        String email=getIntent().getStringExtra("email");
+
+        binding.tutorName.setText(name);
+        binding.tutorEmail.setText(email);
+        binding.tutorLocation.setText(loc);
+        binding.tutorBio.setText(bio);
+        binding.tutorPhoneNumber.setText(contact);
+        binding.tutorEducation.setText(qualification);
+        binding.tutrExperience.setText(experience);
+        binding.tutorRate.setText(amount);
 
 
-        firestore.collection("Tutor").get().addOnCompleteListener(task -> {
-            if(task.isSuccessful()) {
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    Tutor t = document.toObject(Tutor.class);
-                    if (t.getContactNumber().equals(tutorUid)){
-                        tutor = t;
-                    }
-                    Log.d("WandaVision", document.getId() + " => " + tutor);
-                }
-            }
-            else {
-                Log.d("WandaVision", "Error getting documents: ", task.getException());
-            }
-        });
 
-        sendRequest = findViewById(R.id.send_request);
-        sendRequest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firestore.collection("Tutor")
-                        .document(tutor.getUid())
-                        .collection("data")
-                        .document("requests")
-                        .set(tutor);
-//
-            }
-        });
+
+
 
     }
 }

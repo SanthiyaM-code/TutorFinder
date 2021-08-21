@@ -17,11 +17,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
 
-public class StudentMainActivity extends AppCompatActivity {
+public class StudentMainActivity extends AppCompatActivity implements StudentMainRecyclerAdapter.onProfileListener
+{
 
     RecyclerView recyclerView;
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     ArrayList<Tutor> tutors = new ArrayList<>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
     void updateRecyclerView()
     {
-        StudentMainRecyclerAdapter adapter = new StudentMainRecyclerAdapter(tutors);
+        StudentMainRecyclerAdapter adapter = new StudentMainRecyclerAdapter(tutors,this);
         recyclerView.setAdapter(adapter);
     }
 
@@ -74,5 +77,24 @@ public class StudentMainActivity extends AppCompatActivity {
 //            startActivity(new Intent(StudentMainActivity.this,NotificationActivity.class));
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void profileOnClick(int position) {
+        tutors.get(position);
+
+        Intent intent=new Intent(StudentMainActivity.this,TutorProfileViewActivity.class);
+                        intent.putExtra("name",tutors.get(position).getName());
+                        intent.putExtra("bio",tutors.get(position).getBio());
+                        intent.putExtra("location",tutors.get(position).getLocation());
+                        intent.putExtra("email",tutors.get(position).getStrEmail());
+                        intent.putExtra("contactNumber",tutors.get(position).getContactNumber());
+                        intent.putExtra("experience",tutors.get(position).getExperience());
+                        intent.putExtra("qualification",tutors.get(position).getQualifications());
+                        intent.putExtra("amount",tutors.get(position).getAmount());
+                        startActivity(intent);
+
+
+
     }
 }
