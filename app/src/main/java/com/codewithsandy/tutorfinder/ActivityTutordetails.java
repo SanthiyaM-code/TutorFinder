@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import com.codewithsandy.tutorfinder.databinding.ActivityTutordetailsBinding;
@@ -42,11 +41,11 @@ public class ActivityTutordetails extends AppCompatActivity {
             String state=binding.stateTutor.getText().toString();
             String country=binding.tutorCountry.getText().toString();
             //Adding data
-            TutorDetails tutorDetails=new TutorDetails(userEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
-            daoTutorDetails.add(tutorDetails,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
+            Tutor tutor =new Tutor(userEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
+            daoTutorDetails.add(tutor,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
             {
-                Toast.makeText(getApplicationContext(),"Account created successfully!",Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(ActivityTutordetails.this,MainActivity.class));
+                Toast.makeText(getApplicationContext(),"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ActivityTutordetails.this,TutorMainActivity.class));
             }).addOnFailureListener(er->{
                 Toast.makeText(getApplicationContext(),""+er.getMessage(),Toast.LENGTH_SHORT).show();
 

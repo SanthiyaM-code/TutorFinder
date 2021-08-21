@@ -1,8 +1,36 @@
 package com.codewithsandy.tutorfinder;
 
-public class TutorDetails {
+public class Tutor {
 
+    String name;
     String strEmail;
+    String qualifications;
+    String Experience;
+    String amount;
+    String Bio;
+    String location;
+    String contactNumber;
+    String state;
+    String country;
+
+    float rating;
+    int studentsCount;
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public int getStudentsCount() {
+        return studentsCount;
+    }
+
+    public void setStudentsCount(int studentsCount) {
+        this.studentsCount = studentsCount;
+    }
 
     public String getStrEmail() {
         return strEmail;
@@ -87,11 +115,10 @@ public class TutorDetails {
 
     String strPassword;
     String cnfrmPassword;
-    String name;
 
-    public TutorDetails(){}
+    public Tutor(){}
 
-    public TutorDetails(String strEmail, String name, String qualifications, String experience, String amount, String bio, String location, String contactNumber, String state, String country) {
+    public Tutor(String strEmail, String name, String qualifications, String experience, String amount, String bio, String location, String contactNumber, String state, String country) {
         this.strEmail = strEmail;
         this.name = name;
         this.qualifications = qualifications;
@@ -102,14 +129,9 @@ public class TutorDetails {
         this.contactNumber = contactNumber;
         this.state = state;
         this.country = country;
+        this.rating = 0.0f;
+        this.studentsCount = 0;
     }
 
-    String qualifications;
-    String Experience;
-    String amount;
-    String Bio;
-    String location;
-    String contactNumber;
-    String state;
-    String country;
+
 }

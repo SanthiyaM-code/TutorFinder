@@ -13,6 +13,17 @@
         <activity android:name=".TutorProfile" />
         <activity android:name=".ActivityTutorSignup" />
         <activity android:name=".ActivityStudentSignup" />
+
+        <activity
+            android:name=".FavoritesActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StudentMainActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".TutorMainActivity"
+            android:exported="true"/>
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

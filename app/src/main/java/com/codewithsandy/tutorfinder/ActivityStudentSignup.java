@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.codewithsandy.tutorfinder.databinding.ActivityLoginBinding;
 import com.codewithsandy.tutorfinder.databinding.ActivityStudentSignupBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -88,8 +87,8 @@ public class ActivityStudentSignup extends AppCompatActivity {
                         {
                             finish();
                             //Adding data
-                            StudentDetails studentDetails=new StudentDetails(strEmail,name,grade,clgName,location,contactNumber,state,country);
-                            daoStudentDetails.add(studentDetails,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
+                            Student student =new Student(strEmail,name,grade,clgName,location,contactNumber,state,country);
+                            daoStudentDetails.add(student,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
                             {
 
                                 Toast.makeText(ActivityStudentSignup.this,"Account created successfully!",Toast.LENGTH_SHORT).show();
@@ -98,7 +97,7 @@ public class ActivityStudentSignup extends AppCompatActivity {
 
                             });
 
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),StudentMainActivity.class));
                         }
                         else
                         {
