@@ -66,7 +66,17 @@ public class LoginActivity extends AppCompatActivity {
                             if(task.isSuccessful())
                             {
                                 finish();
-                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                                if(isStudent) {
+                                    startActivity(new Intent(LoginActivity.this, StudentMainActivity.class));
+                                }
+                                else if(isTutor)
+                                {
+                                    startActivity(new Intent(LoginActivity.this,TutorMainActivity.class));
+                                }
+                                else
+                                {
+                                    Toast.makeText(LoginActivity.this,"Please select student or Tutor",Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     });
@@ -81,25 +91,20 @@ public class LoginActivity extends AppCompatActivity {
                 final Dialog dialog=new Dialog(context);
                 dialog.setContentView(R.layout.signup_dialog);
                 dialog.setTitle("Confirm");
-                Button stu=dialog.findViewById(R.id.buttonStudent);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getWindow().setLayout(600,600);
-                stu.setOnClickListener(v12 -> {
-                    startActivity(new Intent(getApplicationContext(),ActivityStudentSignup.class));
-                    dialog.dismiss();
-                    finish();
-                });
+
                 Button tutor=dialog.findViewById(R.id.buttontutor);
                 Button student=dialog.findViewById(R.id.buttonStudent);
                 tutor.setOnClickListener(v1 -> {
                     startActivity(new Intent(getApplicationContext(),ActivityTutorSignup.class));
                     dialog.dismiss();
-                    finish();
+
                 });
                 student.setOnClickListener(v13 -> {
                     startActivity(new Intent(getApplicationContext(),ActivityStudentSignup.class));
                     dialog.dismiss();
-                    finish();
+
 
                 });
 

@@ -19,24 +19,27 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/back_arrow_review"
+                    android:id="@+id/back_arrow"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginStart="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:src="@drawable/ic_round_keyboard_arrow_left_24"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/black" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
+                    android:textColor="@color/grey"
                     android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
                     android:gravity="fill"
                     android:text="Profile"
-                    android:fontFamily="@font/nunito_semibold"
                     android:textSize="23dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="27dp"
-            android:backgroundTint="#EBEDEE"
+            android:backgroundTint="#F0F3F4"
             android:layout_marginLeft="27dp"
             android:layout_marginTop="5dp"
             app:cardCornerRadius="15dp">
@@ -69,6 +72,7 @@
                     android:layout_gravity="center">
                     <ImageView
                         android:layout_width="90dp"
+                        android:id="@+id/tutorProfile"
                         android:layout_height="90dp"
                         android:src="@drawable/small_dp_1"
                         />
@@ -77,6 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="John Smith"
+                    android:id="@+id/tutorName"
                     android:textColor="@color/text_blue"
                     android:fontFamily="@font/nunito_semibold"
                     android:layout_gravity="center"
@@ -88,6 +93,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
                     android:textAlignment="center"
+                    android:id="@+id/tutorBio"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/nunito"
                     android:text="@string/long_text"/>
@@ -106,9 +112,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hyderabad"
+                        android:id="@+id/tutorLocation"
                         android:fontFamily="@font/nunito_semibold"
                         android:textSize="13dp"
-                        android:textColor="@color/grey"/>
+                        android:textColor="@color/text_blue"/>
 
                 </LinearLayout>
 
@@ -116,84 +123,89 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
+                    android:fontFamily="@font/nunito"
                     android:text="Contact info"
                     android:layout_marginTop="30dp"
                     android:layout_marginStart="50dp"
-                    android:textColor="@color/med_grey"
-                    android:textSize="14dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="email@gmail.com"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="50dp"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
+                    android:fontFamily="@font/nunito"
+                    android:text="email@gmail.com"
+                    android:id="@+id/tutorEmail"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="50dp"
+                    android:textColor="@color/text_blue"
+                    android:textSize="14dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
                     android:text="+91 9090687890 / +91 9090689012"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="50dp"
-                    android:textColor="@color/black"
+                    android:id="@+id/tutorPhoneNumber"
+                    android:textColor="@color/text_blue"
                     android:textSize="14dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
+                    android:fontFamily="@font/nunito"
                     android:text="Qualifications"
                     android:layout_marginTop="30dp"
                     android:layout_marginStart="50dp"
-                    android:textColor="@color/med_grey"
+                    android:textColor="@color/black"
                     android:textSize="14dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
+                    android:fontFamily="@font/nunito"
                     android:text="BE CSE at Sri Eshwar College"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="50dp"
-                    android:textColor="@color/black"
+                    android:id="@+id/tutorEducation"
+                    android:textColor="@color/text_blue"
                     android:textSize="14dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
+                    android:fontFamily="@font/nunito"
                     android:text="Experience"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="50dp"
-                    android:textColor="@color/med_grey"
-                    android:textSize="14dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
-                    android:text="5 years"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginStart="50dp"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
+                    android:fontFamily="@font/nunito"
+                    android:text="5 years"
+                    android:id="@+id/tutrExperience"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="50dp"
+                    android:textColor="@color/text_blue"
+                    android:textSize="14dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito"
                     android:text="Monthly Rate"
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="50dp"
-                    android:textColor="@color/med_grey"
+                    android:textColor="@color/black"
                     android:textSize="14dp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_semibold"
+                    android:fontFamily="@font/nunito"
                     android:text="Rs 5000/month"
+                    android:id="@+id/tutorRate"
                     android:layout_marginTop="5dp"
                     android:layout_marginStart="50dp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_blue"
                     android:textSize="14dp" />
 
                 <TextView
@@ -206,7 +218,7 @@
                     android:paddingTop="10dp"
                     android:layout_marginBottom="30dp"
                     android:paddingBottom="10dp"
-                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/nunito_bold"
                     android:text="Edit Profile"
                     android:textColor="@color/text_blue"
                     android:textSize="14dp"
