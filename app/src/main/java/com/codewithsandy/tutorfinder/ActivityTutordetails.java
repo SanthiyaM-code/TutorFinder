@@ -44,8 +44,10 @@ public class ActivityTutordetails extends AppCompatActivity {
             String country=binding.tutorCountry.getText().toString();
             Random rand = new Random();
             float randomNum = (float) (rand.nextInt((5 - 1) + 1) + 1);
+            int randomNum2 =  (rand.nextInt((100 - 1) + 1) + 1);
             Tutor tutor =new Tutor(userEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
             tutor.setRating(randomNum);
+            tutor.setStudentsCount(randomNum2);
             tutor.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
             daoTutorDetails.add(tutor,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
             {
