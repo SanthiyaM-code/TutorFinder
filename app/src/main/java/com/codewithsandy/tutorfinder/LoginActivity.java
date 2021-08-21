@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.codewithsandy.tutorfinder.databinding.ActivityLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,24 +63,33 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull  Task<AuthResult> task) {
-                            progressDialog.dismiss();
+
                             if(task.isSuccessful())
                             {
-                                finish();
+
                                 if(isStudent) {
                                     startActivity(new Intent(LoginActivity.this, StudentMainActivity.class));
+                                    progressDialog.dismiss();
                                 }
                                 else if(isTutor)
                                 {
                                     startActivity(new Intent(LoginActivity.this,TutorMainActivity.class));
+                                    progressDialog.dismiss();
                                 }
                                 else
                                 {
+                                    progressDialog.dismiss();
                                     Toast.makeText(LoginActivity.this,"Please select student or Tutor",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
-                    });
+                    }).addOnFailureListener(this, new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull  Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LoginActivity.this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
 

@@ -9,6 +9,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="27.57dp">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="28dp"
+                android:src="@drawable/ic_round_person_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/nunito"
+                android:textColor="@color/black"
+                android:text="Tutor Information"
+                android:textSize="26dp" />
+
+
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,7 +83,7 @@
             android:layout_marginEnd="24dp"
             android:gravity="center_vertical"
             android:hint="Enter your degree"
-            android:drawableEnd="@drawable/ic_round_keyboard_arrow_down_24"
+            android:fontFamily="@font/nunito"
             android:paddingEnd="30dp"
             android:paddingRight="10dp"
             android:background="@drawable/background"
@@ -83,8 +109,8 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:gravity="center_vertical"
+            android:fontFamily="@font/nunito"
             android:hint="Enter your Experience"
-            android:drawableEnd="@drawable/ic_round_keyboard_arrow_down_24"
             android:paddingEnd="30dp"
             android:paddingRight="10dp"
             android:background="@drawable/background"
@@ -111,7 +137,7 @@
             android:layout_marginEnd="24dp"
             android:gravity="center_vertical"
             android:hint="Enter amount/month"
-            android:drawableEnd="@drawable/ic_round_keyboard_arrow_down_24"
+            android:fontFamily="@font/nunito"
             android:paddingEnd="30dp"
             android:paddingRight="10dp"
             android:background="@drawable/background"
@@ -146,7 +172,7 @@
             android:paddingLeft="29dp"
             android:gravity="top"
             android:paddingTop="20dp"
-            android:hint="Type the message"/>
+            android:hint="About yourself..."/>
 
         <TextView
 
@@ -170,6 +196,7 @@
             android:layout_marginStart="26dp"
             android:layout_marginEnd="24dp"
             android:gravity="center_vertical"
+            android:fontFamily="@font/nunito"
             android:hint="Enter District"
             android:paddingRight="10dp"
             android:background="@drawable/background"
@@ -192,10 +219,11 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:layout_marginTop="10dp"
             android:layout_marginStart="26dp"
             android:layout_marginEnd="24dp"
+            android:fontFamily="@font/nunito"
             android:gravity="center_vertical"
             android:hint="Enter a 10 digit number"
             android:paddingRight="10dp"
@@ -223,10 +251,9 @@
             android:layout_marginStart="26dp"
             android:layout_marginEnd="24dp"
             android:gravity="center_vertical"
-            android:hint="Andhra Pradesh"
-            android:drawableEnd="@drawable/ic_round_keyboard_arrow_down_24"
+            android:fontFamily="@font/nunito"
+            android:hint="Kerala"
             android:paddingEnd="30dp"
-            android:textColorHint="#3CA6DA"
             android:textStyle="bold"
             android:background="@drawable/background"
             android:paddingStart="20dp"
@@ -254,9 +281,8 @@
             android:layout_marginEnd="24dp"
             android:gravity="center_vertical"
             android:hint="India"
-            android:drawableEnd="@drawable/ic_round_keyboard_arrow_down_24"
+            android:fontFamily="@font/nunito"
             android:paddingEnd="30dp"
-            android:textColorHint="#3CA6DA"
             android:textStyle="bold"
             android:background="@drawable/background"
             android:paddingStart="20dp"

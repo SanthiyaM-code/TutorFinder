@@ -83,7 +83,7 @@ public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecycl
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.popup_fav:
+                case R.id.popup_fav_rem:
 
                     //TODO( Delete Tutor from Favorites )
 

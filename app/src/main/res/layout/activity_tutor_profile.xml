@@ -219,6 +219,7 @@
                     android:layout_marginBottom="30dp"
                     android:paddingBottom="10dp"
                     android:fontFamily="@font/nunito_bold"
+
                     android:text="Edit Profile"
                     android:textColor="@color/text_blue"
                     android:textSize="14dp"

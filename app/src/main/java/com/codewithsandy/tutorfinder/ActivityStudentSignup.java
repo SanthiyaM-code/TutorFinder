@@ -85,7 +85,7 @@ public class ActivityStudentSignup extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful())
                         {
-                            finish();
+
                             //Adding data
                             Student student =new Student(strEmail,name,grade,clgName,location,contactNumber,state,country);
                             daoStudentDetails.add(student,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
