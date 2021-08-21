@@ -45,7 +45,7 @@ public class ActivityTutordetails extends AppCompatActivity {
             TutorDetails tutorDetails=new TutorDetails(userEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
             daoTutorDetails.add(tutorDetails,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
             {
-                Toast.makeText(getApplicationContext(),"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Account created successfully!",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(ActivityTutordetails.this,MainActivity.class));
             }).addOnFailureListener(er->{
                 Toast.makeText(getApplicationContext(),""+er.getMessage(),Toast.LENGTH_SHORT).show();

@@ -92,7 +92,7 @@ public class ActivityStudentSignup extends AppCompatActivity {
                             daoStudentDetails.add(studentDetails,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
                             {
 
-                                Toast.makeText(ActivityStudentSignup.this,"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ActivityStudentSignup.this,"Account created successfully!",Toast.LENGTH_SHORT).show();
                             }).addOnFailureListener(er->{
                                 Toast.makeText(ActivityStudentSignup.this,""+er.getMessage(),Toast.LENGTH_SHORT).show();
 

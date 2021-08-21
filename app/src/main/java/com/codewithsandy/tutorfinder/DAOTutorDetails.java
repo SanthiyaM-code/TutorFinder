@@ -13,25 +13,9 @@ public class DAOTutorDetails {
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
 
-//    public DAOTutorDetails() {
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        databaseReference = firebaseDatabase.getReference(TutorDetails.class.getSimpleName());
-//    }
 
     public Task<Void> add(TutorDetails tutorDetails, String uid) {
         return firestore.collection("Tutor").document(uid).set(tutorDetails);
     }
 
-//    public Task<Void> update(String key, HashMap<String, Object> hashMap) {
-//
-//        return databaseReference.child(key).updateChildren(hashMap);
-//    }
-
-//    public Task<Void> remove(String key) {
-//        return databaseReference.child(key).removeValue();
-//    }
-//
-//    public Query get() {
-//        return databaseReference.orderByKey();
-//    }
 }

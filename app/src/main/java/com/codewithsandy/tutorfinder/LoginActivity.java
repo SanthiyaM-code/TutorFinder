@@ -7,6 +7,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -80,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.signup_dialog);
                 dialog.setTitle("Confirm");
                 Button stu=dialog.findViewById(R.id.buttonStudent);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().setLayout(600,600);
                 stu.setOnClickListener(v12 -> {
                     startActivity(new Intent(getApplicationContext(),ActivityStudentSignup.class));
                     dialog.dismiss();
