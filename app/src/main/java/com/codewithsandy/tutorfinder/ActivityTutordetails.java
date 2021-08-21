@@ -2,6 +2,7 @@ package com.codewithsandy.tutorfinder;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class ActivityTutordetails extends AppCompatActivity {
     private ActivityTutordetailsBinding binding;
     DAOTutorDetails daoTutorDetails;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,10 @@ public class ActivityTutordetails extends AppCompatActivity {
             String country=binding.tutorCountry.getText().toString();
             //Adding data
             TutorDetails tutorDetails=new TutorDetails(userEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
-            daoTutorDetails.add(tutorDetails).addOnSuccessListener(suc->
+            daoTutorDetails.add(tutorDetails,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
             {
                 Toast.makeText(getApplicationContext(),"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ActivityTutordetails.this,MainActivity.class));
             }).addOnFailureListener(er->{
                 Toast.makeText(getApplicationContext(),""+er.getMessage(),Toast.LENGTH_SHORT).show();
 
