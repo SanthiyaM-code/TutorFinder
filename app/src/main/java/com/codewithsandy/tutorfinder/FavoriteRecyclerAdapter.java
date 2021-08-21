@@ -1,5 +1,6 @@
 package com.codewithsandy.tutorfinder;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +19,11 @@ import java.util.ArrayList;
 public class FavoriteRecyclerAdapter extends RecyclerView.Adapter<FavoriteRecyclerAdapter.FavViewHolder> {
 
     private ArrayList<Tutor> tutorList;
+    Context context;
 
-    public FavoriteRecyclerAdapter(ArrayList<Tutor> tutorList) {
+    public FavoriteRecyclerAdapter(ArrayList<Tutor> tutorList, Context context) {
         this.tutorList = tutorList;
+        this.context=context;
     }
 
     @NonNull

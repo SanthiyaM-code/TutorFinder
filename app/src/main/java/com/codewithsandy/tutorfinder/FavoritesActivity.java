@@ -1,15 +1,28 @@
 package com.codewithsandy.tutorfinder;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class FavoritesActivity extends AppCompatActivity {
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    ArrayList<Tutor> tutorsFav = new ArrayList<>();
 
     RecyclerView favrecyclerView;
     Toolbar toolbar;
@@ -25,13 +38,32 @@ public class FavoritesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(arrow -> onBackPressed());
 
-        ArrayList<Tutor> tutors = new ArrayList<>();
-//        tutors.add(new Tutor("FavTut 1", 1.1f, 10));
-//        tutors.add(new Tutor("Tutor 2", 2.2f, 11));
-//        tutors.add(new Tutor("Tutor 3", 3.3f, 12));
 
 
-        FavoriteRecyclerAdapter adapter = new FavoriteRecyclerAdapter(tutors);
+        String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        firestore.collection("Student").document(uid).collection("Favorite").get()
+                .addOnCompleteListener(task ->
+                {
+
+                    if (task.isSuccessful())
+                    {
+                        Log.e("WandaVision", ""+task.getResult().isEmpty());
+                        for (QueryDocumentSnapshot documentSnapshot : task.getResult())
+                        {
+                            Tutor tutor = documentSnapshot.toObject(Tutor.class);
+                            tutorsFav.add(tutor);
+                            Log.d("WandaVision", documentSnapshot.getId() + " => " + tutor);
+
+                        }
+                        updateFavRecyclerView();
+                    }
+
+                });
+
+
+
+
+        FavoriteRecyclerAdapter adapter = new FavoriteRecyclerAdapter(tutorsFav,this);
 
         favrecyclerView = findViewById(R.id.fav_recyclerview);
         favrecyclerView.setHasFixedSize(true);
@@ -39,5 +71,11 @@ public class FavoritesActivity extends AppCompatActivity {
         favrecyclerView.setAdapter(adapter);
 
     }
+    void updateFavRecyclerView()
+    {
+        FavoriteRecyclerAdapter adapter = new FavoriteRecyclerAdapter(tutorsFav,this);
+        favrecyclerView.setAdapter(adapter);
+    }
+
 
 }
