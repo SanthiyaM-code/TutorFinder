@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.signup_dialog);
                 dialog.setTitle("Confirm");
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.getWindow().setLayout(600,600);
+//                dialog.getWindow().setLayout(600,600);
 
                 Button tutor=dialog.findViewById(R.id.buttontutor);
                 Button student=dialog.findViewById(R.id.buttonStudent);

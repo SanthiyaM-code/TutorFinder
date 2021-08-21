@@ -2,6 +2,7 @@ package com.codewithsandy.tutorfinder;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -11,11 +12,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import java.util.ArrayList;
 
 public class StudentMainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    ArrayList<Tutor> tutors = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,21 +31,33 @@ public class StudentMainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
 
-        ArrayList<Tutor> tutors = new ArrayList<>();
-//        tutors.add(new Tutor("Tutor 1", 1.1f, 10));
-//        tutors.add(new Tutor("Tutor 2", 2.2f, 11));
-//        tutors.add(new Tutor("Tutor 3", 3.3f, 12));
-//        tutors.add(new Tutor("Tutor 4", 4.4f, 13));
-//        tutors.add(new Tutor("Tutor 5", 5.5f, 14));
 
-        StudentMainRecyclerAdapter adapter = new StudentMainRecyclerAdapter(tutors);
+        firestore.collection("Tutor").get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+//                    allTutors.add(document.getData());
+                    Tutor tutor = document.toObject(Tutor.class);
+                    tutors.add(tutor);
+                    Log.d("WandaVision", document.getId() + " => " + tutor);
+                }
+                updateRecyclerView();
+            }
+            else {
+                Log.d("WandaVision", "Error getting documents: ", task.getException());
+            }
+        });
 
         recyclerView = findViewById(R.id.main_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        updateRecyclerView();
+
+    }
+
+    void updateRecyclerView()
+    {
+        StudentMainRecyclerAdapter adapter = new StudentMainRecyclerAdapter(tutors);
         recyclerView.setAdapter(adapter);
-
-
     }
 
     @Override
