@@ -10,6 +10,8 @@ import com.codewithsandy.tutorfinder.databinding.ActivityTutordetailsBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Random;
+
 public class ActivityTutordetails extends AppCompatActivity {
     private ActivityTutordetailsBinding binding;
     DAOTutorDetails daoTutorDetails;
@@ -40,8 +42,10 @@ public class ActivityTutordetails extends AppCompatActivity {
             String contactNumber=binding.tutorContactNumber.getText().toString();
             String state=binding.stateTutor.getText().toString();
             String country=binding.tutorCountry.getText().toString();
-            //Adding data
+            Random rand = new Random();
+            float randomNum = (float) (rand.nextInt((5 - 1) + 1) + 1);
             Tutor tutor =new Tutor(userEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
+            tutor.setRating(randomNum);
             tutor.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
             daoTutorDetails.add(tutor,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
             {
