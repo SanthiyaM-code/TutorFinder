@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codewithsandy.tutorfinder.databinding.ActivityTutorProfileViewBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +29,7 @@ public class TutorProfileViewActivity extends AppCompatActivity {
         binding=ActivityTutorProfileViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         String name=getIntent().getStringExtra("name");
         String loc=getIntent().getStringExtra("location");
         String bio=getIntent().getStringExtra("bio");
@@ -44,11 +47,14 @@ public class TutorProfileViewActivity extends AppCompatActivity {
         binding.tutorEducation.setText(qualification);
         binding.tutrExperience.setText(experience);
         binding.tutorRate.setText(amount);
+        binding.ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Toast.makeText(TutorProfileViewActivity.this,"Thanks for the feedback!",Toast.LENGTH_SHORT).show();
 
-
-
-
-
+            }
+        });
 
     }
+
 }

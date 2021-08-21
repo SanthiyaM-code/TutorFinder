@@ -31,11 +31,12 @@ public class TutorMainRecyclerAdapter extends RecyclerView.Adapter<TutorMainRecy
     @Override
     public void onBindViewHolder(@NonNull TutMainViewHolder holder, int position) {
         holder.imageView.setImageResource(R.drawable.dummyimageda);
-        holder.name.setText(studentList.get(position).name);
-        holder.grade.setText(studentList.get(position).grade);
+        holder.name.setText(studentList.get(position).getName());
+        holder.grade.setText(studentList.get(position).getGrade());
         holder.loc.setText(studentList.get(position).getLocatin());
         holder.contact.setText(studentList.get(position).getContact());
         holder.clgName.setText(studentList.get(position).getClg_name());
+        holder.email.setText(studentList.get(position).getEmail());
 
 
 
@@ -52,7 +53,7 @@ public class TutorMainRecyclerAdapter extends RecyclerView.Adapter<TutorMainRecy
         ImageView imageView;
         TextView name;
         TextView grade;
-        TextView loc,contact,clgName;
+        TextView loc,contact,clgName,email;
 
         public TutMainViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -62,6 +63,7 @@ public class TutorMainRecyclerAdapter extends RecyclerView.Adapter<TutorMainRecy
             loc=itemView.findViewById(R.id.student_loc);
             contact=itemView.findViewById(R.id.student_contact);
             clgName=itemView.findViewById(R.id.student_clg);
+            email=itemView.findViewById(R.id.student_email) ;
         }
     }
 
