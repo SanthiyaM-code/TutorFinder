@@ -88,6 +88,7 @@ public class ActivityStudentSignup extends AppCompatActivity {
 
                             //Adding data
                             Student student =new Student(strEmail,name,grade,clgName,location,contactNumber,state,country);
+                            student.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
                             daoStudentDetails.add(student,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
                             {
 

@@ -12,6 +12,24 @@ public class Tutor {
     String contactNumber;
     String state;
     String country;
+    String uid;
+    String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
 
     float rating;
     int studentsCount;
@@ -131,6 +149,8 @@ public class Tutor {
         this.country = country;
         this.rating = 0.0f;
         this.studentsCount = 0;
+        this.uid = "";
+        this.image = "";
     }
 
 

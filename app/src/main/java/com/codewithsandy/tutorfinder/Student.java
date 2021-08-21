@@ -74,6 +74,25 @@ public class Student {
     String locatin;
     String contact;
     String state;
+    String uid;
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    String image;
 
     public Student(String name, String email, String grade, String clg_name, String locatin, String contact, String state, String cntry) {
         this.name = name;
@@ -84,6 +103,8 @@ public class Student {
         this.contact = contact;
         this.state = state;
         this.cntry = cntry;
+        this.uid = "";
+        this.image = "";
     }
 
     String cntry;

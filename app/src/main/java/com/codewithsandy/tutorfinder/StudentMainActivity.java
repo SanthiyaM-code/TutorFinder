@@ -56,7 +56,7 @@ public class StudentMainActivity extends AppCompatActivity {
 
     void updateRecyclerView()
     {
-        StudentMainRecyclerAdapter adapter = new StudentMainRecyclerAdapter(tutors);
+        StudentMainRecyclerAdapter adapter = new StudentMainRecyclerAdapter(tutors,this);
         recyclerView.setAdapter(adapter);
     }
 

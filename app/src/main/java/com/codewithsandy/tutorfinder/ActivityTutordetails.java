@@ -42,6 +42,7 @@ public class ActivityTutordetails extends AppCompatActivity {
             String country=binding.tutorCountry.getText().toString();
             //Adding data
             Tutor tutor =new Tutor(userEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
+            tutor.setUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
             daoTutorDetails.add(tutor,FirebaseAuth.getInstance().getCurrentUser().getUid()).addOnSuccessListener(suc->
             {
                 Toast.makeText(getApplicationContext(),"Account created successfully!",Toast.LENGTH_SHORT).show();
