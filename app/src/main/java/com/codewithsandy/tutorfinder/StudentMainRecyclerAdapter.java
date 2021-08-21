@@ -2,6 +2,7 @@ package com.codewithsandy.tutorfinder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,18 +71,15 @@ public class StudentMainRecyclerAdapter extends RecyclerView.Adapter<StudentMain
             super(itemView);
             this.tutors = tutors;
             this.context = context;
-        }
-
-        public MainViewHolder(@NonNull View itemView) {
-            super(itemView);
             imageView = itemView.findViewById(R.id.card_image);
             name = itemView.findViewById(R.id.card_name);
             rating = itemView.findViewById(R.id.tv_rating);
             studCount = itemView.findViewById(R.id.tv_studentscount);
             options = itemView.findViewById(R.id.card_options);
-
             options.setOnClickListener(this);
         }
+
+
 
         @Override
         public void onClick(View view) {
@@ -108,9 +107,10 @@ public class StudentMainRecyclerAdapter extends RecyclerView.Adapter<StudentMain
                     //TODO(" Go to Profile Activity ");
 
                     Tutor tutor = tutors.get(getAdapterPosition());
-                    Intent intent = new Intent();
-                    intent.putExtra("tutorUid",tutor.getUid());
-                    context.startActivity(new Intent(context,TutorProfileViewActivity.class));
+                    Intent intent = new Intent(context,TutorProfileViewActivity.class);
+                    intent.putExtra("tutorUid",tutor.getContactNumber());
+//                    Log.d("TutorID", tutor.getUid());
+                    context.startActivity(intent);
                     return true;
                 default:
                     return true;

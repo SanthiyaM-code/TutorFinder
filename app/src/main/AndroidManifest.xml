@@ -13,6 +13,7 @@
         <activity android:name=".TutorProfile" />
         <activity android:name=".ActivityTutorSignup" />
         <activity android:name=".ActivityStudentSignup" />
+        <activity android:name=".TutorProfileViewActivity"/>
 
         <activity
             android:name=".FavoritesActivity"
@@ -20,18 +21,18 @@
         <activity
             android:name=".StudentMainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".TutorMainActivity"
             android:exported="true"/>
 
         <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
     </application>
