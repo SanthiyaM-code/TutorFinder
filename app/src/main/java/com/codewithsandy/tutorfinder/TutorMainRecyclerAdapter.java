@@ -33,6 +33,12 @@ public class TutorMainRecyclerAdapter extends RecyclerView.Adapter<TutorMainRecy
         holder.imageView.setImageResource(R.drawable.dummyimageda);
         holder.name.setText(studentList.get(position).name);
         holder.grade.setText(studentList.get(position).grade);
+        holder.loc.setText(studentList.get(position).getLocatin());
+        holder.contact.setText(studentList.get(position).getContact());
+        holder.clgName.setText(studentList.get(position).getClg_name());
+
+
+
     }
 
     @Override
@@ -46,12 +52,16 @@ public class TutorMainRecyclerAdapter extends RecyclerView.Adapter<TutorMainRecy
         ImageView imageView;
         TextView name;
         TextView grade;
+        TextView loc,contact,clgName;
 
         public TutMainViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.student_image);
             name = itemView.findViewById(R.id.student_name);
             grade = itemView.findViewById(R.id.student_grade);
+            loc=itemView.findViewById(R.id.student_loc);
+            contact=itemView.findViewById(R.id.student_contact);
+            clgName=itemView.findViewById(R.id.student_clg);
         }
     }
 

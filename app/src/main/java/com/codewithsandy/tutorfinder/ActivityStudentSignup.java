@@ -32,14 +32,6 @@ public class ActivityStudentSignup extends AppCompatActivity {
         progressDialog=new ProgressDialog(this);
         firebaseAuth=FirebaseAuth.getInstance();
 
-//        if(firebaseAuth.getCurrentUser()!=null)
-//        {
-//            finish();
-//            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-//        }
-
-
-
         binding.studentSignup.setOnClickListener(v -> {
             registerUser();
         });

@@ -82,6 +82,11 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this,"Please select student or Tutor",Toast.LENGTH_SHORT).show();
                                 }
                             }
+                            else
+                            {
+                                Toast.makeText(LoginActivity.this,"No such User found!",Toast.LENGTH_SHORT).show();
+
+                            }
                         }
                     }).addOnFailureListener(this, new OnFailureListener() {
                 @Override
