@@ -1,10 +1,10 @@
 package com.codewithsandy.tutorfinder;
 
-public class StudentDetails {
+public class Student {
     String name;
     String email;
     String grade;
-    public StudentDetails(){}
+    public Student(){}
 
     public String getName() {
         return name;
@@ -75,7 +75,7 @@ public class StudentDetails {
     String contact;
     String state;
 
-    public StudentDetails(String name, String email, String grade, String clg_name, String locatin, String contact, String state, String cntry) {
+    public Student(String name, String email, String grade, String clg_name, String locatin, String contact, String state, String cntry) {
         this.name = name;
         this.email = email;
         this.grade = grade;

@@ -1,12 +1,7 @@
 package com.codewithsandy.tutorfinder;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
 
 public class DAOStudentDetails {
 
@@ -19,9 +14,9 @@ public class DAOStudentDetails {
 //
 //    }
 
-    public Task<Void> add(StudentDetails studentDetails, String uid)
+    public Task<Void> add(Student student, String uid)
     {
-        return firestore.collection("Student").document(uid).set(studentDetails);
+        return firestore.collection("Student").document(uid).set(student);
     }
 
 //    public Task<Void> update (String key, HashMap<String,Object> hashMap)
