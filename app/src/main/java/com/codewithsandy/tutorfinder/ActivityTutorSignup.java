@@ -29,15 +29,13 @@ public class ActivityTutorSignup extends AppCompatActivity {
         binding=ActivityTutorSignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         progressDialog=new ProgressDialog(this);
         firebaseAuth=FirebaseAuth.getInstance();
 
 
 
         binding.infoSave.setOnClickListener(v -> {
-
-
+            registerUser();
         });
     }
     private void  registerUser(){
@@ -46,16 +44,6 @@ public class ActivityTutorSignup extends AppCompatActivity {
 
         String strEmail=binding.tutorEmail.getText().toString();
         String strPassword=binding.tutorPasswordr.getText().toString();
-        String cnfrmPassword=binding.tutorConfrmPassrd.getText().toString();
-        String name=binding.tutorname.getText().toString();
-        String qualifications=binding.tutorQualification.getText().toString();
-        String Experience=binding.tutorExperience.getText().toString();
-        String amount=binding.monthlyRate.getText().toString();
-        String Bio=binding.tutorBio.getText().toString();
-        String location=binding.etutorLocation.getText().toString();
-        String contactNumber=binding.tutorContactNumber.getText().toString();
-        String state=binding.stateTutor.getText().toString();
-        String country=binding.tutorCountry.getText().toString();
 
 
         if(TextUtils.isEmpty(strEmail))
@@ -78,17 +66,8 @@ public class ActivityTutorSignup extends AppCompatActivity {
                         if (task.isSuccessful())
                         {
                             finish();
-                            //Adding data
-                            TutorDetails tutorDetails=new TutorDetails(strEmail,name,qualifications,Experience,amount,Bio,location,contactNumber,state,country);
-                            daoTutorDetails.add(tutorDetails,strEmail).addOnSuccessListener(suc->
-                            {
-                                Toast.makeText(getApplicationContext(),"Account created successfully!\\nverification link is sent to your id\\nplease verify and login again!\"",Toast.LENGTH_SHORT).show();
-                            }).addOnFailureListener(er->{
-                                Toast.makeText(getApplicationContext(),""+er.getMessage(),Toast.LENGTH_SHORT).show();
 
-                            });
-
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),ActivityTutordetails.class));
                         }
                         else
                         {

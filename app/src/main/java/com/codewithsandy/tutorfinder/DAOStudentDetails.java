@@ -18,7 +18,7 @@ public class DAOStudentDetails {
 
     public Task<Void> add(StudentDetails studentDetails, String email)
     {
-        return databaseReference.push().child("StudentDetails").setValue(studentDetails);
+        return databaseReference.push().setValue(studentDetails);
     }
     public Task<Void> update (String key, HashMap<String,Object> hashMap)
     {
